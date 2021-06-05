@@ -1,0 +1,162 @@
+﻿@model MVCCRUDwithoutEF.Models.KhachHangViewModel
+@{ ViewData["Title"] = "Thông tin tài khoản";}
+<div class="container py-3">
+    <div class="account py-2">
+        <div class="account__img">
+            <img src="~/image/user/512x512bb.jpg">
+        </div>
+        <div class="account__text px-4 my-3">
+            <label>@TempData["username"]</label>
+        </div>
+    </div>
+    <div class="row py-2">
+        <div class="col-sm-3">
+            <div class="account__menu">
+                <ul>
+                    <li><a class="active" href="#account__infor" onclick="tabAcc(this)"><i class="fas fa-info mr-3"></i>Thông tin tài khoản</a></li>
+                    <li><a href="#account__edit" onclick="tabAcc(this)"><i class="fas fa-sliders-h mr-3"></i>Thay đổi mật khẩu</a></li>
+                    <li><a class="logout" asp-action="Logout"><i class="fas fa-sign-out-alt mr-3"></i>Đăng xuất</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9 px-3">
+            <div class="account__title border-bottom">
+                <label>Thông tin tài khoản</label>
+            </div>
+            <div class="account__infor account__active tab" id="account__infor">
+                <div class="d-flex py-3">
+                    <label>Tên đăng nhập </label>
+                    <span>@TempData["username"]</span>
+                </div>
+                <div class="d-flex py-3">
+                    <label>Họ và tên </label>
+                    <span>@TempData["name"]</span>
+                </div>
+                <div class="d-flex py-3">
+                    <label>Địa chỉ </label>
+                    <span>@TempData["address"]</span>
+                </div>
+            </div>
+            <div class="account__image py-3 tab" id="account__image">
+                <div class="row">
+                    <div class="col-sm-6 text-center">
+                        <img src="~/image/user/512x512bb.jpg">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group py-3 mb-0">
+                            <label>Thay đổi ảnh đại diện</label>
+                            <input type="file" name="hinhanh" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="account__bill py-3 tab" id="account__bill">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã hóa đơn</th>
+                            <th>Tên đăng nhập</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HD.0001</td>
+                            <td>phamhongnghia</td>
+                            <td>No.00001</td>
+                            <td>Thuật Đắc Nhân Tâm Nâng Tầm Hiệu Suất</td>
+                            <td>2</td>
+                            <td>59.500 ₫</td>
+                        </tr>
+                        <tr>
+                            <td>HD.0001</td>
+                            <td>phamhongnghia</td>
+                            <td>No.00001</td>
+                            <td>Thuật Đắc Nhân Tâm Nâng Tầm Hiệu Suất</td>
+                            <td>2</td>
+                            <td>59.500 ₫</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="account__details__bill py-3">
+                    <div class="title__details__bill border-bottom">
+                        <label>Thông tin đơn hàng</label>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-sm-4">
+                            <div class="img__bill">
+                                <img class="img-fluid" src="image/product/big_img/4daigiakiemtoanbia1.jpg">
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="title__bill">
+                                <label>4 Đại Gia Kiểm Toán</label>
+                            </div>
+                            <div class="right__bill py-2">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="qty__bill">
+                                            <label>Số lượng :</label>
+                                            <span class="mx-2">2</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="price__bill">
+                                            <label>Thành tiền :</label>
+                                            <span class="mx-2">59.500 ₫</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details__single__bill border">
+                                <div class="title__single__bill p-2 bg-light border-bottom">
+                                    <label class="m-0">Thông tin đơn hàng</label>
+                                </div>
+                                <div class="panel__bill p-3">
+                                    <div>
+                                        <label>Mã đơn hàng :</label>
+                                        <span class="mx-2">HD.0001</span>
+                                    </div>
+                                    <div>
+                                        <label>Mã sản phẩm :</label>
+                                        <span>HD.0001</span>
+                                    </div>
+                                    <div>
+                                        <label>Ngày tạo :</label>
+                                        <span class="mx-2">27/02/2021</span>
+                                    </div>
+                                    <div>
+                                        <label>SDT đặt hàng :</label>
+                                        <span class="mx-2">0356156445</span>
+                                    </div>
+                                    <div>
+                                        <label>Tình trạng :</label>
+                                        <span class="mx-2 text-success">Đã xử lý</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="account__edit py-3 tab" id="account__edit">
+                <form asp-action="ChangePassword">
+                    <div class="form-group d-flex py-3 mb-0">
+                        <label>Tên đăng nhập</label>
+                        <input type="text" asp-for="Tendangnhap" required value="@TempData["username"]">
+                    </div>
+                    <div class="form-group d-flex py-3 mb-0">
+                        <label>Mật khẩu mới</label>
+                        <input type="password" asp-for="Matkhau" required>
+                    </div>
+                    <div class="form-group d-flex py-2">
+                        <button>Xác Nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,217 @@
+﻿@model System.Data.DataTable
+@using Microsoft.AspNetCore.Http
+@{ ViewData["Title"] = "Grid Book"; }
+
+<!-- Header -->
+<header class="container-fluid header">
+    <div class="row header__sticky">
+        <div class="col-sm-3 header__logo">
+            <h5>BookShop</h5>
+        </div>
+        <div class="col-sm-6 header__menu">
+            <ul>
+                <li><a asp-action="">Trang chủ</a></li>
+                <li>
+                    <a href="#">Tủ Sách</a>
+                    <div class="menu__dropdown menu_1 row">
+                        <div class="col-sm-4">
+                            <h5 class="py-3 border-bottom">Sách trong nước</h5>
+                            <ul>
+                                <li><a asp-action="GridBook" asp-route-id="1">Văn học trong nước</a></li>
+                                <li><a asp-action="GridBook" asp-route-id="3">Sách công nghệ</a></li>
+                                <li><a asp-action="GridBook" asp-route-id="4">Sách tham khảo</a></li>
+                                <li><a asp-action="GridBook" asp-route-id="5">Tiểu sử hồi ký</a></li>
+                                <li><a asp-action="GridBook" asp-route-id="6">Sách kinh doanh</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <h5 class="py-3 border-bottom">Sách nước ngoài</h5>
+                            <ul>
+                                <li><a asp-action="GridBook" asp-route-id="2">Văn học nước ngoài</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">Trẻ em</a>
+                </li>
+                <li>
+                    <a href="#">Page</a>
+                </li>
+                <li><a href="contacts.html">Liên hệ</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-3 header__menu">
+            <ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a class="text-capitalize" href="#">@User.Identity.Name</a>
+                        <div class="menu__dropdown menu_i">
+                            <div class="">
+                                <h5 class="py-3 border-bottom">Tài khoản của bạn</h5>
+                                <ul>
+                                    <li><a asp-action="Account">Thông tin tài khoản</a></li>
+                                    <li>
+                                        <form class="form-inline" asp-action="Logout" method="post">
+                                            <button type="submit" class="custom_btn">Đăng xuất</button>
+                                        </form>
+                                    </li>
+                                    @*<li><a asp-action="Logout" style="color: red">Đăng xuất</a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a class="text-capitalize" asp-action="Register">Đăng nhập / Đăng ký</a>
+                    </li>
+                }
+
+
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="header__banner bg__3">
+    <div class="header__link">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="text-white" asp-action="">Trang chủ</a></li>
+        </ol>
+    </div>
+</div>
+
+
+<!-- Single product -->
+
+<div class="container bg-white py-5">
+    <div class="row">
+        <div class="col-sm-3 py-3">
+            <div class="single__details">
+                <div class="single__title">
+                    <h5>Danh mục sản phẩm</h5>
+                </div>
+                <div class="product__categories py-2">
+                    <a id="VH_TN" href="">Văn học trong nước <span></span></a>
+                    <a id="VH_NN" href="">Văn học nước ngoài <span></span></a>
+                    <a id="KTE" href="">Kinh tế <span></span></a>
+                    <a id="NNGU" href="">Ngoại ngữ <span></span></a>
+                    <a id="TNHI" href="">Thiếu nhi <span></span></a>
+                    <a id="TEM" href="">Sách trẻ em <span></span></a>
+                    <a id="TSHK" href="">Tiểu sử hồi ký <span></span></a>
+                    <a id="TLH" href="">Tâm lý học <span></span></a>
+                    <a id="QLKD" href="">Quản lý kinh doanh <span></span></a>
+                    <a id="KHVT" href="">Khoa học viễn tưởng <span></span></a>
+                    <a id="GKTK" href="">Giáo khoa tham khảo <span></span></a>
+                    <a id="VPP" href="">Văn phòng phẩm <span></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="grid__product">
+                @if (Model.Rows.Count != 0)
+                {
+                    @for (int i = 0; i < Model.Rows.Count; i++)
+                    {
+                        <div class="product__woo">
+                            <div class="product__img">
+                                <img src="~/image/product/sm_img/@Model.Rows[i]["Image"]" alt="">
+                            </div>
+                            <div class="product__text pt-2 text-center">
+                                <a asp-action="DetailBook" asp-route-id="@Model.Rows[i]["BookID"]">@Model.Rows[i]["Title"]</a>
+                            </div>
+                            <div class="product__cart">
+                                <i class="fa fa-shopping-cart" onclick="addCart(this)" aria-hidden="true"></i>
+                            </div>
+                            <div class="product__price">
+                                <label class="discounted">@{int price = Convert.ToInt32(Model.Rows[i]["Price"]) - (Convert.ToInt32(Model.Rows[i]["Price"]) * Convert.ToInt32(Model.Rows[i]["Sale"])) / 100;} @price</label>
+                                <span class="mx-2 root__price">@Model.Rows[i]["Price"]</span>
+                                <span class="mx-2">@Model.Rows[i]["Sale"]%</span>
+                            </div>
+                        </div>
+                    }
+            }
+            else
+            {
+            <div class="text-center py-3">
+                <label class="text-danger font-weight-bolder">Hiện tại không có sản phẩm !</label>
+            </div>
+               
+            }
+            </div>
+            @if(Model.Rows.Count != 0)
+            {
+                <div class="view__more py-4">
+                    <a href="#">xem thêm</a>
+                </div>
+            }
+            
+        </div>
+    </div>
+
+</div>
+
+
+<!-- register email for web -->
+
+<div class="container-fluid py-4 with__us">
+    <div class="row">
+        <div class="col-sm-6 offer__us">
+            <div class="offer__us__title text-center pb-3">
+                <h4>Đăng ký <span>nhận tin</span></h4>
+                <p>Đăng ký các bản tin của chúng tôi ngay bây giờ và luôn cập nhật các bộ sưu tập mới, các lookbook mới nhất và các ưu đãi độc quyền</p>
+            </div>
+            <div class="offer__us__input">
+                <form action="">
+                    <input type="email" name="email" placeholder="Nhập email của bạn" required>
+                    <input type="submit" name="submit" value="Đăng ký">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="footer__logo">
+                <h5>Book<span>Shop</span></h5>
+                <p>Nhóm 2 Đồ án chuyên ngành.</p>
+            </div>
+            <div class="footer__address">
+                <div class="pt-3">
+                    <span class="mb-2"><i class="mr-2 fa fa-map-marker" aria-hidden="true"></i> 980 Phan Đình Phùng, TP.Quảng Ngãi </span><br>
+                    <span class="mb-2"><i class="mr-2 fa fa-google-plus" aria-hidden="true"></i> phamhongnghia13579@gmail.com </span><br>
+                    <span class="mb-2"><i class="mr-2 fa fa-phone-square" aria-hidden="true"></i> 0356156445 </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 footer__text">
+            <div class="offer__us__title pb-3">
+                <h4>Về chúng tôi</h4>
+            </div>
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Liên hệ</a></li>
+                <li><a href="#">Chính sách</a></li>
+                <li><a href="#">Hình thức thanh toán</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-3 footer__social">
+            <div class="offer__us__title pb-3">
+                <h4>Mạng xã hội</h4>
+            </div>
+            <ul>
+                <li><a href="">Fanpage</a></li>
+                <li><a href="">Instagram</a></li>
+                <li><a href="">Twitter</a></li>
+                <li><a href="">Youtube</a></li>
+                <li><a href="">Gmail</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container pt-3 pb-2 footer__copyright text-center">
+        <span>Copyright. Nhóm 2 2021</span>
+    </div>
+</footer>

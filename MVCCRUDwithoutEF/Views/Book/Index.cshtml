@@ -1,0 +1,229 @@
+﻿@model System.Data.DataTable
+@using Microsoft.AspNetCore.Http
+@{ ViewData["Title"] = "BookShop"; }
+
+<!-- Header -->
+<header class="container-fluid header">
+    <div class="row header__sticky">
+        <div class="col-sm-3 header__logo">
+            <h5>BookShop</h5>
+        </div>
+        <div class="col-sm-6 header__menu">
+            <ul>
+                <li><a asp-action="">Trang chủ</a></li>
+                <li>
+                    <a href="#">Tủ Sách</a>
+                    <div class="menu__dropdown menu_1 row">
+                        <div class="col-sm-4">
+                            <h5 class="py-3 border-bottom">Sách trong nước</h5>
+                            <ul>
+                                <li><a asp-action="GridBook" asp-route-id="1">Văn học trong nước</a></li>
+                                <li><a asp-action="GridBook" asp-route-id="3">Sách công nghệ</a></li>
+                                <li><a asp-action="GridBook" asp-route-id="4">Sách tham khảo</a></li>
+                                <li><a asp-action="GridBook" asp-route-id="5">Tiểu sử hồi ký</a></li>
+                                <li><a asp-action="GridBook" asp-route-id="6">Sách kinh doanh</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <h5 class="py-3 border-bottom">Sách nước ngoài</h5>
+                            <ul>
+                                <li><a asp-action="GridBook" asp-route-id="2">Văn học nước ngoài</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">Trẻ em</a>
+                </li>
+                <li>
+                    <a href="#">Page</a>
+                </li>
+                <li><a href="contacts.html">Liên hệ</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-3 header__menu">
+            <ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                <li>
+                    <a class="text-capitalize" href="#" >@User.Identity.Name</a>
+                    <div class="menu__dropdown menu_i">
+                        <div class="">
+                            <h5 class="py-3 border-bottom">Tài khoản của bạn</h5>
+                            <ul>
+                                <li><a asp-action="Account">Thông tin tài khoản</a></li>
+                                <li>
+                                    <form class="form-inline" asp-action="Logout" method="post">
+                                        <button type="submit" class="custom_btn">Đăng xuất</button>
+                                    </form>
+                                </li>
+                                @*<li><a asp-action="Logout" style="color: red">Đăng xuất</a></li>*@
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                }
+                else
+                {
+                    <li>
+                        <a class="text-capitalize" asp-action="Register">Đăng nhập / Đăng ký</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="header__banner bg__1">
+    <div class="header__title">
+        <h5>Book<span>Shop</span></h5>
+        <label>Mua <span>ngay</span></label>
+        <label>Sách bạn <span>yêu thích</span></label>
+        <label>Tại <span>đây</span></label>
+        <a href="#sale_pr">Xem ngay <i class="fa fa-arrow-right ml-2" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+<!-- Slide sale product -->
+<div class="container py-5" id="sale_pr">
+    <div class="title__wn sale_pr text-center pb-3">
+        <h4>Sách <span>giới thiệu</span></h4>
+        <p>Những cuốn sách hay nên đọc. Sách được viết bởi những tác giả trẻ, những bộ óc văn học vĩ đại nhất, họ có những chủ đề, nhân vật, kinh nghiệm, cảm xúc và quan điểm sống luôn liên quan đến mỗi người chúng ta.</p>
+    </div>
+
+    <!--  Demos -->
+    <div class="list__sale py-3"> 
+        @for (int i = 0; i < Model.Rows.Count; i++)
+        {
+            <div class="product__woo">
+                <div class="product__img">
+                    <img src="~/image/product/sm_img/@Model.Rows[i]["Image"]" alt="">
+                </div>
+                <div class="product__text pt-2 text-center">
+                    <a asp-action="DetailBook" asp-route-id="@Model.Rows[i]["BookID"]">@Model.Rows[i]["Title"]</a>
+                </div>
+                <div class="product__cart">
+                    <i class="fa fa-shopping-cart" onclick="addCart(this)" aria-hidden="true"></i>
+                </div>
+                <div class="product__price">
+                    <label class="discounted">@{int price = Convert.ToInt32(Model.Rows[i]["Price"]) - (Convert.ToInt32(Model.Rows[i]["Price"]) * Convert.ToInt32(Model.Rows[i]["Sale"])) / 100;} @price</label>
+                    <span class="mx-2 root__price">@Model.Rows[i]["Price"]</span>
+                    <span class="mx-2">@Model.Rows[i]["Sale"]%</span>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+<!-- register email for web -->
+
+<div class="container-fluid py-4 with__us">
+    <div class="row">
+        <div class="col-sm-6 offer__us">
+            <div class="offer__us__title text-center pb-3">
+                <h4>Đăng ký <span>nhận tin</span></h4>
+                <p>Đăng ký các bản tin của chúng tôi ngay bây giờ và luôn cập nhật các bộ sưu tập mới, các lookbook mới nhất và các ưu đãi độc quyền</p>
+            </div>
+            <div class="offer__us__input">
+                <form action="">
+                    <input type="email" name="email" placeholder="Nhập email của bạn" required>
+                    <input type="submit" name="submit" value="Đăng ký">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-4">
+    <div class="title__wn sale_pr text-center pb-3">
+        <h4>Tất cả <span>Sản phẩm</span></h4>
+        <p>Có rất nhiều các Top sách hay nổi tiếng trên thế giới mà các bạn nên đọc. Chúng tôi sẽ giới thiệu những cuốn sách mà bút lực của người viết đã vượt qua được giới hạn thể loại và đối tượng độc giả ban đầu họ muốn nhắm đến, chính vì vậy các sách hay này xứng đáng để mọi người tìm đọc.</p>
+    </div>
+    <div class="menu__product py-3">
+        <ul>
+            <li><a class="active__menu" href="#ALL" onclick="btnProduct(this)">Tất cả</a></li>
+            <li><a href="#STN" onclick="btnProduct(this)">Sách trong nước</a></li>
+            <li><a href="#SNN" onclick="btnProduct(this)">Sách nước ngoài</a></li>
+            <li><a href="#OTHER" onclick="btnProduct(this)">Khác</a></li>
+        </ul>
+    </div>
+    <div class="all__product py-4">
+        @for (int i = 0; i < Model.Rows.Count; i++)
+        {
+            <div class="product__woo">
+                <div class="product__img">
+                    <img src="~/image/product/sm_img/@Model.Rows[i]["Image"]" alt="">
+                </div>
+                <div class="product__text pt-2 text-center">
+                    <a href="#">@Model.Rows[i]["Title"]</a>
+                </div>
+                <div class="product__cart">
+                    <i class="fa fa-shopping-cart" onclick="addCart(this)" aria-hidden="true"></i>
+                </div>
+                <div class="product__price">
+                    <label class="discounted">@{int price = Convert.ToInt32(Model.Rows[i]["Price"]) - (Convert.ToInt32(Model.Rows[i]["Price"]) * Convert.ToInt32(Model.Rows[i]["Sale"])) / 100;} @price</label>
+                    <span class="mx-2 root__price">@Model.Rows[i]["Price"]</span>
+                    <span class="mx-2">@Model.Rows[i]["Sale"]%</span>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="view__more">
+        <a href="#">xem thêm</a>
+    </div>
+</div>
+
+<div class="container py-4">
+    <div class="title__wn sale_pr text-center pb-3">
+        <h4>Tác giả <span>Nổi tiếng</span></h4>
+        <p>Thế giới văn chương rất rộng lớn với sự xuất hiện của những tác phẩm kinh điển cùng các tác giả có tầm ảnh hưởng. Nếu yêu thích dòng văn học trong nước vào thế kỷ 20 hay ngày nay, bạn đọc hãy cùng BookShop điểm qua các tác giả nổi tiếng trong giai đoạn này.</p>
+    </div>
+    <div class="row py-3 author__major">
+
+    </div>
+</div>
+
+
+<footer class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="footer__logo">
+                <h5>Book<span>Shop</span></h5>
+                <p>Nhóm 2 Đồ án chuyên ngành.</p>
+            </div>
+            <div class="footer__address">
+                <div class="pt-3">
+                    <span class="mb-2"><i class="mr-2 fa fa-map-marker" aria-hidden="true"></i> 980 Phan Đình Phùng, TP.Quảng Ngãi </span><br>
+                    <span class="mb-2"><i class="mr-2 fa fa-google-plus" aria-hidden="true"></i> phamhongnghia13579@gmail.com </span><br>
+                    <span class="mb-2"><i class="mr-2 fa fa-phone-square" aria-hidden="true"></i> 0356156445 </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 footer__text">
+            <div class="offer__us__title pb-3">
+                <h4>Về chúng tôi</h4>
+            </div>
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Liên hệ</a></li>
+                <li><a href="#">Chính sách</a></li>
+                <li><a href="#">Hình thức thanh toán</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-3 footer__social">
+            <div class="offer__us__title pb-3">
+                <h4>Mạng xã hội</h4>
+            </div>
+            <ul>
+                <li><a href="">Fanpage</a></li>
+                <li><a href="">Instagram</a></li>
+                <li><a href="">Twitter</a></li>
+                <li><a href="">Youtube</a></li>
+                <li><a href="">Gmail</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container pt-3 pb-2 footer__copyright text-center">
+        <span>Copyright. Nhóm 2 2021</span>
+    </div>
+</footer>

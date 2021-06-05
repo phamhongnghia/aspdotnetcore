@@ -1,0 +1,71 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewData["Title"] = "List of Books";
+
+}
+<div class="container pb-3">
+    @if (User.Identity.IsAuthenticated)
+    {
+<div class="text-right py-3 px-2">
+    <div class="d-flex">
+        <label class="m-0"><i class="fas fa-user-shield"></i>  <span class="font-weight-bold text-uppercase">@User.Identity.Name</span></label>
+        <form class="form-inline" asp-action="Logout" method="post">
+            <button class="custom_btn" type="submit" style="font-size:14px; padding: 0px 10px;">Đăng xuất</button>
+        </form>
+    </div>
+</div>}
+    <div class="jumbotron">
+        <h1 class="text-center">@ViewData["Title"]</h1>
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    Book Title
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Sale
+                </th>
+                <th>
+                    <a asp-action="AddOrEdit">Create New</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Rows.Count; i++)
+            {
+<tr>
+    <td>
+        @Model.Rows[i]["Title"]
+    </td>
+    <td>
+        @Model.Rows[i]["Author"]
+    </td>
+    <td>
+        @Model.Rows[i]["Price"]
+    </td>
+    <td>
+        @Model.Rows[i]["Image"]
+    </td>
+    <td>
+        @Model.Rows[i]["Sale"]
+    </td>
+    <td>
+        <a asp-action="AddOrEdit" asp-route-id="@Model.Rows[i]["BookID"]">Edit</a> |
+        <a asp-action="Delete" asp-route-id="@Model.Rows[i]["BookID"]">Delete</a>
+    </td>
+</tr>}
+        </tbody>
+    </table>
+</div>

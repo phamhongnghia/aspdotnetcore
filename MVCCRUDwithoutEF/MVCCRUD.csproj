@@ -1,0 +1,112 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\image\product\sm_img\bitheodoi.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome" Version="4.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\ajax-loader.gif" />
+    <None Include="wwwroot\css\bootstrap.min.css" />
+    <None Include="wwwroot\css\cropper.css" />
+    <None Include="wwwroot\css\croppie.css" />
+    <None Include="wwwroot\css\feedback.css" />
+    <None Include="wwwroot\css\fonts\slick.eot" />
+    <None Include="wwwroot\css\fonts\slick.svg" />
+    <None Include="wwwroot\css\fonts\slick.ttf" />
+    <None Include="wwwroot\css\fonts\slick.woff" />
+    <None Include="wwwroot\css\plugins\account.css" />
+    <None Include="wwwroot\css\plugins\admin.css" />
+    <None Include="wwwroot\css\plugins\cart.css" />
+    <None Include="wwwroot\css\plugins\contacts.css" />
+    <None Include="wwwroot\css\plugins\default.css" />
+    <None Include="wwwroot\css\plugins\feedback.css" />
+    <None Include="wwwroot\css\plugins\login-admin.css" />
+    <None Include="wwwroot\css\plugins\modal.css" />
+    <None Include="wwwroot\css\plugins\product.css" />
+    <None Include="wwwroot\css\plugins\register.css" />
+    <None Include="wwwroot\css\plugins\single-product.css" />
+    <None Include="wwwroot\css\slick-theme.css" />
+    <None Include="wwwroot\css\slick.css" />
+    <None Include="wwwroot\image\banner\1.jpg" />
+    <None Include="wwwroot\image\banner\2.jpg" />
+    <None Include="wwwroot\image\banner\3.jpg" />
+    <None Include="wwwroot\image\banner\4.jpg" />
+    <None Include="wwwroot\image\banner\5.jpg" />
+    <None Include="wwwroot\image\banner\bg.jpg" />
+    <None Include="wwwroot\image\icon\facebook.png" />
+    <None Include="wwwroot\image\icon\greeting.png" />
+    <None Include="wwwroot\image\icon\instagram.png" />
+    <None Include="wwwroot\image\icon\phone_calling.gif" />
+    <None Include="wwwroot\image\icon\youtube.png" />
+    <None Include="wwwroot\image\logo\sm_logo\logo.png" />
+    <None Include="wwwroot\image\producer\nnanh.jpg" />
+    <None Include="wwwroot\image\producer\nnthach.jpg" />
+    <None Include="wwwroot\image\producer\npv.jpg" />
+    <None Include="wwwroot\image\producer\trangha.jpg" />
+    <None Include="wwwroot\image\product\big_img\4daigiakiemtoanbia1.jpg" />
+    <None Include="wwwroot\image\product\big_img\bitheodoi.jpg" />
+    <None Include="wwwroot\image\product\big_img\chienluockethang.jpg" />
+    <None Include="wwwroot\image\product\big_img\conve.jpg" />
+    <None Include="wwwroot\image\product\big_img\dacnhantam.jpg" />
+    <None Include="wwwroot\image\product\big_img\damphanhieuqua.jpg" />
+    <None Include="wwwroot\image\product\big_img\dangthuytram.jpg" />
+    <None Include="wwwroot\image\product\big_img\diepvienx6.jpg" />
+    <None Include="wwwroot\image\product\big_img\giaotiepcs.jpg" />
+    <None Include="wwwroot\image\product\big_img\hoangtube.jpg" />
+    <None Include="wwwroot\image\product\big_img\hocdaidaihoc.png" />
+    <None Include="wwwroot\image\product\big_img\homes_dues.jpg" />
+    <None Include="wwwroot\image\product\big_img\khihoithohoathinhkhong.jpg" />
+    <None Include="wwwroot\image\product\big_img\nighschool.jpg" />
+    <None Include="wwwroot\image\product\big_img\nokia.jpg" />
+    <None Include="wwwroot\image\product\big_img\phicongtiemkich.jpg" />
+    <None Include="wwwroot\image\product\big_img\polar.jpg" />
+    <None Include="wwwroot\image\product\big_img\titan_2.jpg" />
+    <None Include="wwwroot\image\product\big_img\trumpdungbaogiobocuoc.jpg" />
+    <None Include="wwwroot\image\product\big_img\VH_comotnguoitunglaall.jpg" />
+    <None Include="wwwroot\image\product\big_img\VH_conchimxanhbietbayve.jpg" />
+    <None Include="wwwroot\image\product\big_img\VH_dauchantrencat.jpg" />
+    <None Include="wwwroot\image\product\big_img\VH_dauxua.jpg" />
+    <None Include="wwwroot\image\product\big_img\VH_haisophan.jpg" />
+    <None Include="wwwroot\image\product\big_img\VH_nhagiakim.jpg" />
+    <None Include="wwwroot\image\product\big_img\VH_tobinhyen.jpg" />
+    <None Include="wwwroot\image\product\big_img\VH_tudientiengem.jpg" />
+    <None Include="wwwroot\image\product\big_img\VH_vuivekoquau.jpg" />
+    <None Include="wwwroot\image\product\big_img\VH_xinchaotinhyeu.jpg" />
+    <None Include="wwwroot\image\product\sm_img\bitheodoi.jpg" />
+    <None Include="wwwroot\image\user\512x512bb.jpg" />
+    <None Include="wwwroot\image\user\800px-Viet_Cong_soldier_DD-ST-99-04298.jpg" />
+    <None Include="wwwroot\image\user\user-avatar-with-check-mark.png" />
+    <None Include="wwwroot\js\animation.js" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\jquery-3.5.1.min.js" />
+    <None Include="wwwroot\js\popper.min.js" />
+    <None Include="wwwroot\js\product.js" />
+    <None Include="wwwroot\js\slick.min.js" />
+    <None Include="wwwroot\js\vendor\ckeditor.js" />
+    <None Include="wwwroot\js\vendor\cropper.js" />
+    <None Include="wwwroot\js\vendor\croppertest.js" />
+    <None Include="wwwroot\js\vendor\croppie.js" />
+    <None Include="wwwroot\js\vendor\data.js" />
+    <None Include="wwwroot\js\vendor\jquery-3.2.1.min.js" />
+    <None Include="wwwroot\js\vendor\modernizr-3.5.0.min.js" />
+  </ItemGroup>
+
+
+
+</Project>

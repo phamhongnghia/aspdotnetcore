@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="~/image/logo/sm_logo/logo.png">
+
+    <!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,600,600i,700,700i,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
+    <!-- Font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+
+    <!-- Slick -->
+    <link rel="stylesheet" type="text/css" href="~/css/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="~/css/slick.css">
+
+    <!-- scss,css -->
+    <link rel="stylesheet" type="text/css" href="~/css/plugins/modal.css">
+    <link rel="stylesheet" type="text/css" href="~/css/plugins/default.css">
+    <link rel="stylesheet" type="text/css" href="~/css/plugins/product.css">
+    <link rel="stylesheet" type="text/css" href="~/css/plugins/register.css">
+    <link rel="stylesheet" type="text/css" href="~/css/plugins/single-product.css">
+    <link rel="stylesheet" type="text/css" href="~/css/plugins/feedback.css">
+    <link rel="stylesheet" type="text/css" href="~/css/plugins/account.css">
+
+    <!-- Modernizr -->
+    <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
+
+    <script src="~/assets/vendors/highlight.js"></script>
+    <script src="~/js/vendor/jquery-3.2.1.min.js"></script>
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/effect.js"></script>
+    @*<script src="~/assets/js/app.js"></script>*@
+    @*<script src="~/js/site.js"></script>*@
+</head>
+<body>
+
+    @RenderBody()
+
+    <div class="alert__cart"></div>
+
+    <!-- JavaScript, Bootstrap 4, slick, data -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/slick.min.js"></script>
+    <script src="~/js/vendor/data.js"></script>
+    <!-- JavaScript Custom -->
+    <script src="~/js/product.js"></script>
+    <script src="~/js/animation.js"></script>
+    <script src="~/js/account.js"></script>
+    @{
+        if (TempData["Message"] != null)
+        {
+            <script>
+            $(document).ready(function () {
+                var mes = "@TempData["Message"]";
+                messageCart(mes);
+                $('.message').fadeIn('slow/400/fast', function () {
+                    $(this).css({
+                        'opacity': '1',
+                        'transition': '.5s',
+                        'visibility': 'visible'
+                    });
+                }).delay(6000).fadeOut('slow/400/fast', function () {
+                    $(this).remove();
+                });
+                @*alert('@TempData["Message"]');*@
+            });
+            </script>
+        }
+    }
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
